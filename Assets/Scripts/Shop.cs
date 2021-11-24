@@ -34,12 +34,12 @@ public class Shop : MonoBehaviour
         _usersDatabase = FindObjectOfType<UsersTestDatabase>();
         _itemsDatabase = FindObjectOfType<ItemsTestDatabase>();
 
-        if (File.Exists(_path))
-        {
-            LoadDataFromJSON();
-        }
-        else
-        {
+        //if (File.Exists(_path))
+        //{
+        //    LoadDataFromJSON();
+        //}
+        //else
+        //{
             for (int i = 0; i < countOfAnnouncements; i++)
             {
                 Item item = _itemsDatabase.GetRandomItem();
@@ -49,7 +49,7 @@ public class Shop : MonoBehaviour
             }
 
             SaveDataToJSON();
-        }
+        //}
     }
 
     private void CreateAnnouncement(Item item, int count, User user)

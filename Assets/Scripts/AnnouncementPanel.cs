@@ -17,6 +17,7 @@ public class AnnouncementPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _userLevel;
     [SerializeField] private RawImage _userAvatar;
 
+    [SerializeField] private GameObject[] _content;
 
     public void UpdateView(AnnouncementData data)
     {
@@ -53,12 +54,30 @@ public class AnnouncementPanel : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        Texture2D texture = DownloadHandlerTexture.GetContent(request); 
+        Texture2D texture;
+        try
+        {
+            texture = DownloadHandlerTexture.GetContent(request);
+        }
+        catch (System.Exception)
+        {
+
+            texture = null;
+        }
+
         if(texture != null)
         {
             _userAvatar.texture = texture;
         }
 
         yield break;
+    }
+
+    public void SetContentVisible(bool toVisible)
+    {
+        foreach (var panel in _content)
+        {
+            panel.SetActive(toVisible);
+        }
     }
 }
